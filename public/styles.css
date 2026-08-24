@@ -188,6 +188,7 @@ h2 {
 .card-index { padding-top: 3px; color: var(--coral); font: 500 .75rem "DM Mono", monospace; }
 .card-title-row { display: flex; justify-content: space-between; align-items: start; gap: 24px; }
 .business-type { margin: 0 0 7px; color: var(--green); font: 500 .7rem "DM Mono", monospace; text-transform: uppercase; }
+.business-logo { width: 42px; height: 42px; object-fit: contain; display: block; margin-bottom: 12px; border: 1px solid var(--line); background: var(--white); }
 h3 { margin: 0; font-size: clamp(1.2rem, 2vw, 1.55rem); letter-spacing: 0; }
 .rating { flex: 0 0 auto; color: var(--ink); font: 500 .82rem "DM Mono", monospace; }
 .rating::first-letter { color: var(--coral); }

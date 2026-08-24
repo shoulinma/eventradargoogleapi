@@ -1,6 +1,7 @@
 const METERS_PER_MILE = 1609.344;
 const MAX_RADIUS_METERS = 50000;
 const MAX_RESULTS = 20;
+const { scrapeWebsiteMetadata } = require('./websiteMetadata');
 
 class GoogleApiError extends Error {
   constructor(message, status = 502) {
@@ -104,7 +105,7 @@ async function searchNearbyBusinesses(location, radiusMeters, apiKey, fetchImpl 
   });
 
   const body = await parseGoogleResponse(response, 'Unable to search for nearby businesses.');
-  return (body.places || []).map((place) => ({
+  const businesses = (body.places || []).map((place) => ({
     id: place.id,
     name: place.displayName?.text || 'Unnamed business',
     businessType: place.primaryTypeDisplayName?.text || formatType(place.primaryType),
@@ -119,8 +120,14 @@ async function searchNearbyBusinesses(location, radiusMeters, apiKey, fetchImpl 
     reviewCount: place.userRatingCount ?? 0,
     hours: place.regularOpeningHours?.weekdayDescriptions || [],
     location: place.location || null,
-    email: null
+    email: null,
+    logoUrl: null
   }));
+
+  return Promise.all(businesses.map(async (business) => ({
+    ...business,
+    ...await scrapeWebsiteMetadata(business.website, fetchImpl)
+  })));
 }
 
 function formatType(value) {

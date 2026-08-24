@@ -71,6 +71,7 @@ function businessCard(business, index) {
       <div class="card-main">
         <div class="card-title-row">
           <div>
+            ${business.logoUrl ? `<img class="business-logo" src="${escapeAttribute(business.logoUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}
             <p class="business-type">${escapeHtml(business.businessType)}</p>
             <h3>${escapeHtml(business.name)}</h3>
           </div>
@@ -80,7 +81,7 @@ function businessCard(business, index) {
           ${infoRow('pin', business.address, business.googleMapsUrl)}
           ${infoRow('phone', business.phone, business.phone ? `tel:${business.phone}` : null)}
           ${infoRow('globe', business.website ? displayDomain(business.website) : null, business.website)}
-          ${infoRow('mail', 'Email not provided by Google', null, true)}
+          ${infoRow('mail', business.email, business.email ? `mailto:${business.email}` : null)}
         </div>
         <div class="types">${types}</div>
         ${hours}
