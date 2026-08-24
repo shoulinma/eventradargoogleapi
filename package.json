@@ -1,0 +1,19 @@
+{
+  "name": "google-business-finder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Find nearby businesses with Google Maps Platform APIs.",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0"
+  }
+}
